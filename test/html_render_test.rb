@@ -23,7 +23,7 @@ class HTMLRenderTest < Redcarpet::TestCase
   # Hint: overrides filter_html, no_images and no_links
   def test_that_escape_html_works
     source = <<EOS
-Through <em>NO</em> <script>DOUBLE NO</script>
+Through <i>NO</i> <script>DOUBLE NO</script>
 
 <script>BAD</script>
 
@@ -42,7 +42,7 @@ EOE
   end
 
   def test_that_filter_html_works
-    markdown = render_with(@rndr[:no_html], 'Through <em>NO</em> <script>DOUBLE NO</script>')
+    markdown = render_with(@rndr[:no_html], 'Through <i>NO</i> <script>DOUBLE NO</script>')
     html_equal "<p>Through NO DOUBLE NO</p>\n", markdown
   end
 
@@ -102,11 +102,11 @@ However, this should be *`an emphasised codespan`*
 MD
 
     html = <<HTML
-<p>This should be <strong><code>a bold codespan</code></strong>
-However, this should be <em><code>an emphasised codespan</code></em></p>
+<p>This should be <b><code>a bold codespan</code></b>
+However, this should be <i><code>an emphasised codespan</code></i></p>
 
 <ul>
-<li><strong><code>ABC</code></strong> or <strong><code>DEF</code></strong></li>
+<li><b><code>ABC</code></b> or <b><code>DEF</code></b></li>
 <li>Foo bar</li>
 </ul>
 HTML

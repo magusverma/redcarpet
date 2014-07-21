@@ -18,13 +18,13 @@ class MarkdownTest < Redcarpet::TestCase
 
   def test_that_inline_markdown_goes_to_html
     markdown = @markdown.render('_Hello World_!')
-    html_equal "<p><em>Hello World</em>!</p>\n", markdown
+    html_equal "<p><i>Hello World</i>!</p>\n", markdown
   end
 
   def test_that_inline_markdown_starts_and_ends_correctly
     markdown = render_with({:no_intra_emphasis => true}, '_start _ foo_bar bar_baz _ end_ *italic* **bold** <a>_blah_</a>')
 
-    html_equal "<p><em>start _ foo_bar bar_baz _ end</em> <em>italic</em> <strong>bold</strong> <a><em>blah</em></a></p>\n", markdown
+    html_equal "<p><i>start _ foo_bar bar_baz _ end</i> <i>italic</i> <b>bold</b> <a><i>blah</i></a></p>\n", markdown
 
     markdown = @markdown.render("Run 'rake radiant:extensions:rbac_base:migrate'")
     html_equal "<p>Run 'rake radiant:extensions:rbac_base:migrate'</p>\n", markdown
@@ -98,7 +98,7 @@ HTML
 
   def test_that_intra_emphasis_works
     rd = render_with({}, "foo_bar_baz")
-    html_equal "<p>foo<em>bar</em>baz</p>\n", rd
+    html_equal "<p>foo<i>bar</i>baz</p>\n", rd
 
     rd = render_with({:no_intra_emphasis => true},"foo_bar_baz")
     html_equal "<p>foo_bar_baz</p>\n", rd
@@ -193,7 +193,7 @@ EOS
 
     output = render_with({:underline => true}, text)
     assert output.include? '<u>underlined</u>'
-    assert output.include? '<em>some</em>'
+    assert output.include? '<i>some</i>'
   end
 
   def test_highlight_flag_works
@@ -270,24 +270,24 @@ text
   end
 
   def test_proper_intra_emphasis
-    assert render_with({:no_intra_emphasis => true}, "http://en.wikipedia.org/wiki/Dave_Allen_(comedian)") !~ /<em>/
-    assert render_with({:no_intra_emphasis => true}, "this fails: hello_world_") !~ /<em>/
-    assert render_with({:no_intra_emphasis => true}, "this also fails: hello_world_#bye") !~ /<em>/
-    assert render_with({:no_intra_emphasis => true}, "this works: hello_my_world") !~ /<em>/
-    assert render_with({:no_intra_emphasis => true}, "句中**粗體**測試") =~ /<strong>/
+    assert render_with({:no_intra_emphasis => true}, "http://en.wikipedia.org/wiki/Dave_Allen_(comedian)") !~ /<i>/
+    assert render_with({:no_intra_emphasis => true}, "this fails: hello_world_") !~ /<i>/
+    assert render_with({:no_intra_emphasis => true}, "this also fails: hello_world_#bye") !~ /<i>/
+    assert render_with({:no_intra_emphasis => true}, "this works: hello_my_world") !~ /<i>/
+    assert render_with({:no_intra_emphasis => true}, "句中**粗體**測試") =~ /<b>/
 
     markdown = "This is (**bold**) and this_is_not_italic!"
-    html = "<p>This is (<strong>bold</strong>) and this_is_not_italic!</p>\n"
+    html = "<p>This is (<b>bold</b>) and this_is_not_italic!</p>\n"
     assert_equal html, render_with({:no_intra_emphasis => true}, markdown)
 
     markdown = "This is \"**bold**\""
-    html = "<p>This is &quot;<strong>bold</strong>&quot;</p>\n"
+    html = "<p>This is &quot;<b>bold</b>&quot;</p>\n"
     assert_equal html, render_with({:no_intra_emphasis => true}, markdown)
   end
 
   def test_emphasis_escaping
     markdown = @markdown.render("**foo\\*** _dd\\_dd_")
-    html_equal "<p><strong>foo*</strong> <em>dd_dd</em></p>\n", markdown
+    html_equal "<p><b>foo*</b> <i>dd_dd</i></p>\n", markdown
   end
 
   def test_char_escaping_when_highlighting

@@ -60,14 +60,14 @@ Example:
 
 ~~~~~ ruby
 markdown.render("This is *bongos*, indeed.")
-# => "<p>This is <em>bongos</em>, indeed.</p>"
+# => "<p>This is <i>bongos</i>, indeed.</p>"
 ~~~~~
 
 You can also specify a hash containing the Markdown extensions which the
 parser will identify. The following extensions are accepted:
 
 * `:no_intra_emphasis`: do not parse emphasis inside of words.
-Strings such as `foo_bar_baz` will not generate `<em>` tags.
+Strings such as `foo_bar_baz` will not generate `<i>` tags.
 
 * `:tables`: parse tables, PHP-Markdown style.
 

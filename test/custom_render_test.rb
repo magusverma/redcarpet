@@ -4,13 +4,13 @@ require 'test_helper'
 class CustomRenderTest < Redcarpet::TestCase
   class SimpleRender < Redcarpet::Render::HTML
     def emphasis(text)
-      "<em class=\"cool\">#{text}</em>"
+      "<em class=\"cool\">#{text}</i>"
     end
   end
 
   def test_simple_overload
     md = Redcarpet::Markdown.new(SimpleRender)
-    html_equal "<p>This is <em class=\"cool\">just</em> a test</p>\n",
+    html_equal "<p>This is <em class=\"cool\">just</i> a test</p>\n",
       md.render("This is *just* a test")
   end
 

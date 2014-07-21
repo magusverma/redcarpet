@@ -201,9 +201,9 @@ rndr_double_emphasis(struct buf *ob, const struct buf *text, void *opaque)
 	if (!text || !text->size)
 		return 0;
 
-	BUFPUTSL(ob, "<strong>");
+	BUFPUTSL(ob, "<b>");
 	bufput(ob, text->data, text->size);
-	BUFPUTSL(ob, "</strong>");
+	BUFPUTSL(ob, "</b>");
 
 	return 1;
 }
@@ -212,9 +212,9 @@ static int
 rndr_emphasis(struct buf *ob, const struct buf *text, void *opaque)
 {
 	if (!text || !text->size) return 0;
-	BUFPUTSL(ob, "<em>");
+	BUFPUTSL(ob, "<i>");
 	if (text) bufput(ob, text->data, text->size);
-	BUFPUTSL(ob, "</em>");
+	BUFPUTSL(ob, "</i>");
 	return 1;
 }
 
@@ -411,9 +411,9 @@ static int
 rndr_triple_emphasis(struct buf *ob, const struct buf *text, void *opaque)
 {
 	if (!text || !text->size) return 0;
-	BUFPUTSL(ob, "<strong><em>");
+	BUFPUTSL(ob, "<b><i>");
 	bufput(ob, text->data, text->size);
-	BUFPUTSL(ob, "</em></strong>");
+	BUFPUTSL(ob, "</i></b>");
 	return 1;
 }
 
