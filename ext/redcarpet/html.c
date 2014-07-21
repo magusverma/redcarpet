@@ -365,7 +365,7 @@ rndr_paragraph(struct buf *ob, const struct buf *text, void *opaque)
 	if (i == text->size)
 		return;
 
-	BUFPUTSL(ob, "<p>");
+	BUFPUTSL(ob, " ");
 	if (options->flags & HTML_HARD_WRAP) {
 		size_t org;
 		while (i < text->size) {
@@ -389,7 +389,7 @@ rndr_paragraph(struct buf *ob, const struct buf *text, void *opaque)
 	} else {
 		bufput(ob, &text->data[i], text->size - i);
 	}
-	BUFPUTSL(ob, "</p>\n");
+	BUFPUTSL(ob, " ");
 }
 
 static void
